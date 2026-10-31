@@ -16,7 +16,7 @@ Can be used as standalone web app or browser extension
 
 ## Non-Functional Requirements
 ### NFR-1: Simplicity
-Clean, minimal interface
+Clean, Minimal interface
 Easy to understand and use
 No complex setup required
 No test setup required
