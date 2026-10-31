@@ -1,11 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense & Budget Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+  <main class="app">
+    <header class="topbar">
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <button id="theme-toggle" class="ghost" type="button">Dark mode</button>
+    </header>
+
+    <section class="card balance" aria-live="polite">
+      <p class="balance-label">Total balance</p>
+      <p id="total" class="balance-amount">Rp0</p>
+    </section>
+
+    <section class="card">
+      <h2>Add Transaction</h2>
+      <form id="expense-form" novalidate>
+        <label for="item-name">Item Name</label>
+        <input id="item-name" type="text" placeholder="e.g. Nasi goreng" autocomplete="off">
+
+        <label for="item-amount">Amount</label>
+        <input id="item-amount" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 25000">
+
+        <label for="item-category">Category</label>
+        <select id="item-category"></select>
+
+        <p id="form-error" class="error" role="alert" hidden></p>
+        <button type="submit" class="primary">Add Transaction</button>
+      </form>
+
+      <form id="category-form" class="category-form" novalidate>
+        <label for="new-category">Custom category</label>
+        <div class="inline-row">
+          <input id="new-category" type="text" maxlength="20" placeholder="e.g. Health" autocomplete="off">
+          <button type="submit" class="ghost">Add</button>
+        </div>
+        <p id="category-error" class="error" role="alert" hidden></p>
+        <ul id="category-list" class="chips" aria-label="Your categories"></ul>
+      </form>
+    </section>
+
+    <div class="split">
+      <section class="card">
+        <div class="list-head">
+          <h2>Transactions</h2>
+          <label class="sr-only" for="sort-by">Sort transactions</label>
+          <select id="sort-by">
+            <option value="newest">Newest first</option>
+            <option value="amount-desc">Amount: high to low</option>
+            <option value="amount-asc">Amount: low to high</option>
+            <option value="category">Category (A–Z)</option>
+          </select>
+        </div>
+        <ul id="transaction-list" class="transactions"></ul>
+        <p id="list-empty" class="empty">No transactions yet. Add your first one.</p>
+      </section>
+
+      <section class="card">
+        <h2>Spending by Category</h2>
+        <div class="chart-wrap">
+          <canvas id="chart" aria-label="Pie chart of spending by category" role="img"></canvas>
+          <p id="chart-empty" class="empty">Add a transaction to see your chart.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
